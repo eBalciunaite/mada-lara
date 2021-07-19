@@ -45,7 +45,7 @@ class MasterController extends Controller
     // sumappinam ir redirectinam
         $master->surname = $request->master_surname;
         $master->save();
-        return redirect()->route('master.index');
+        return redirect()->route('master.index')->with('success_message', 'New designer has arrived.');
     }
 
     /**
@@ -83,7 +83,7 @@ class MasterController extends Controller
         $master->name = $request->master_name;
         $master->surname = $request->master_surname;
         $master->save();
-        return redirect()->route('master.index');
+        return redirect()->route('master.index')->with('success_message', 'The designer was edited.');
         
     }
 
@@ -97,9 +97,9 @@ class MasterController extends Controller
     {
         // jei bus daugiau nei 0, bus true ir negalima istrinti
         if($master->masterHasOutfits->count()){
-            return 'Trinti negalima, nes turi nebaigtų darbų';
+            return redirect()->back()->with('info_message', 'There is job to do. Can\'t delete.');
         }
         $master->delete();
-        return redirect()->route('master.index');
+        return redirect()->route('master.index')->with('success_message', 'Master gone.');
     }
 }
