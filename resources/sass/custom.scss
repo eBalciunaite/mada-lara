@@ -25,3 +25,38 @@
   .list-container__buttons * {
     margin: 0 5px;
   }
+
+  fieldset {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    label {
+      margin: 0 5px 0 0;
+    }
+    input {
+      margin: 0 15px 0 0;
+    }
+
+
+  }
+
+  legend {
+    font-size: 12px;
+    margin: 0 10px;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+  }
+
+  .sort-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+    a {
+      margin-left: 15px;
+    }
+  }

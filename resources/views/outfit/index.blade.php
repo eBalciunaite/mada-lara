@@ -5,11 +5,82 @@
    <div class="row justify-content-center">
        <div class="col-md-8">
            <div class="card">
-               <div class="card-header">Outfits</div>
+
+
+               <div class="card-header">
+               <h1>Outfits</h1>
+               {{-- RUSIAVIMAS --}}
+               <form action="{{route('outfit.index')}}" method="get" class="sort-form">
+                  <fieldset>
+                      <legend>Sort by:</legend>
+
+                      <div>
+                        <label>Type</label>
+                        <input type="radio" name="sort_by" value="type" @if('type' == $sort) checked @endif>
+                        </div>
+
+                        <div>
+                        <label>Size</label>
+                        <input type="radio" name="sort_by" value="size" @if('size' == $sort) checked  @endif>
+                      </div>
+                  </fieldset>
+
+                  <fieldset>
+                        <legend>Direction:</legend>
+                        <div>
+                          <label>Asc</label>
+                          <input type="radio" name="dir" value="asc" @if('asc' == $dir) checked  @endif>
+                        </div>
+
+                        <div>
+                          <label>Desc</label>
+                          <input type="radio" name="dir" value="desc" @if('desc' == $dir) checked  @endif>
+                        </div>
+                  </fieldset>
+
+                    <button type="submit" class="btn btn-primary">SORT</button>
+                    <a href="{{route('outfit.index')}}" class="btn btn-primary">CLEAR</a>
+
+               </form>
+
+              {{-- FILTRAVIMAS --}}
+
+              <form action="{{route('outfit.index')}}" method="get" class="sort-form">
+                  <fieldset>
+                  <legend>FILTER BY</legend>
+                  <div class="form-group">
+                    <select name="master_id" class="form-control">
+                        @foreach ($masters as $master)
+                        <option value="{{$master->id}}" @if($default_master==$master->id) selected @endif>
+                            {{$master->name}} {{$master->surname}}
+                        </option>
+                        @endforeach
+                    </select>
+                    <small class="form-text text-muted">Select master from the list</small>
+                  </div>
+                  </fieldset>
+                  <button type="submit" class="btn btn-primary">FILTER</button>
+                  <a href="{{route('outfit.index')}}" class="btn btn-primary">CLEAR</a>
+              </form>
+
+
+              {{-- SEARCH --}}
+              <form action="{{route('outfit.index')}}" method="get" class="sort-form">
+                  <fieldset>
+                    <legend>SEARCH by type</legend>
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="s" value="{{$s}}">
+                    </div>
+                  </fieldset>
+                  <button type="submit" name="do_search" value="1" class="btn btn-primary">SEARCH type</button>
+                  <a href="{{route('outfit.index')}}" class="btn btn-primary">CLEAR</a>
+               </form>
+
+               </div>
 
                <div class="card-body">
                <ul class="list-group">
-                 @foreach ($outfits as $outfit)
+                 @forelse ($outfits as $outfit)
                   <li class="list-group-item">
                     <div class="list-container">
                       <div class="list-container__content">
@@ -24,7 +95,10 @@
                         </form>
                       </div>
                     </div>
-                @endforeach
+                    </li>
+                    @empty
+                      <h3>No results</h3>
+                @endforelse
                 </ul>
                </div>
            </div>

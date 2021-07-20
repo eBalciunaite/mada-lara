@@ -1,33 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
-.list-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.list-container__content {
-  letter-spacing: 0.2px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.list-container__content__master {
-  color: gray;
-  font-style: italic;
-}
-.list-container__content__outfit {
-  letter-spacing: normal;
-}
-.list-container__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.list-container__buttons * {
-  margin: 0 5px;
-}
-
+@charset 'UTF-8';
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10029,4 +10001,69 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+.list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-container__content {
+  letter-spacing: 0.2px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.list-container__content__master {
+  color: gray;
+  font-style: italic;
+}
+
+.list-container__content__outfit {
+  letter-spacing: normal;
+}
+
+.list-container__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-container__buttons * {
+  margin: 0 5px;
+}
+
+fieldset {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+fieldset label {
+  margin: 0 5px 0 0;
+}
+fieldset input {
+  margin: 0 15px 0 0;
+}
+
+legend {
+  font-size: 12px;
+  margin: 0 10px;
+  display: inline-block;
+  width: 70px;
+  text-align: center;
+}
+
+.sort-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+}
+.sort-form a {
+  margin-left: 15px;
 }

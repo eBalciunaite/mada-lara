@@ -13,10 +13,71 @@ class OutfitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $outfits = Outfit::all();
-        return view('outfit.index', ['outfits' => $outfits]);
+        // shortcutas, kuris paima viska ir nesiparina del tvarkos ir panasiai
+        // $outfits = Outfit::all();
+
+        // get() ivykdo uzklausa orderBy
+        // $outfits = Outfit::orderBy('size', 'desc')->get();
+
+        // defaultiniai, kad neatsoktu atgal reiksmes, rodytu, kas BUVo prispaudyta
+        $dir = 'asc';
+        $sort = 'type';
+        $default_master = 0;
+        $masters = Master::all();
+        $s = '';
+
+
+        // RUSIAVIMAS
+        if($request->sort_by && $request->dir) {
+            if('type' ==  $request->sort_by && 'asc' ==  $request->dir) {
+                $outfits = Outfit::orderBy('type')->get();
+            }
+            elseif('type' ==  $request->sort_by && 'desc' ==  $request->dir) {
+                $outfits = Outfit::orderBy('type','desc')->get();
+                $dir = 'desc';
+            }
+            elseif('size' ==  $request->sort_by && 'asc' ==  $request->dir) {
+                $outfits = Outfit::orderBy('size')->get();
+                $sort = 'size';
+            }
+            elseif('size' ==  $request->sort_by && 'desc' ==  $request->dir) {
+                $outfits = Outfit::orderBy('size', 'desc')->get();
+                $dir = 'desc';
+                $sort = 'size';
+            }
+            else {
+                $outfits = Outfit::all();
+            }
+        }
+        // FILTRAVIMAS
+        elseif($request->master_id) {
+            $outfits = Outfit::where('master_id', (int) $request->master_id)->get();
+            $default_master = (int) $request->master_id;
+        }
+        // SEARCH paieska
+        elseif($request->s) {
+                //'%'. searchina kazko panasaus, jei rasai coat, atiduoda rain coat ir t.t.
+                // % tipo bet kas
+                $outfits = Outfit::where('type', 'like', '%'.$request->s.'%')->get();
+                $s = $request->s;
+        }
+        elseif($request->do_search) {
+            $outfits = Outfit::where('type', 'like', '')->get();
+    }
+        else {
+            $outfits = Outfit::all();
+        }
+
+        return view('outfit.index', [
+            'outfits' => $outfits, 
+            'dir' => $dir, 
+            'sort' => $sort,
+            'masters' => $masters,
+            'default_master' => $default_master,
+            's' => $s
+        ]);
     }
 
     /**
