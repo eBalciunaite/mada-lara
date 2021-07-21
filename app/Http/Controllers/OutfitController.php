@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class OutfitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +22,8 @@ class OutfitController extends Controller
         // shortcutas, kuris paima viska ir nesiparina del tvarkos ir panasiai
         // $outfits = Outfit::all();
 
-        // get() ivykdo uzklausa orderBy
-        // $outfits = Outfit::orderBy('size', 'desc')->get();
+        // paginate(15)->withQueryString() ivykdo uzklausa orderBy
+        // $outfits = Outfit::orderBy('size', 'desc')->paginate(15)->withQueryString();
 
         // defaultiniai, kad neatsoktu atgal reiksmes, rodytu, kas BUVo prispaudyta
         $dir = 'asc';
@@ -32,42 +36,42 @@ class OutfitController extends Controller
         // RUSIAVIMAS
         if($request->sort_by && $request->dir) {
             if('type' ==  $request->sort_by && 'asc' ==  $request->dir) {
-                $outfits = Outfit::orderBy('type')->get();
+                $outfits = Outfit::orderBy('type')->paginate(15)->withQueryString();
             }
             elseif('type' ==  $request->sort_by && 'desc' ==  $request->dir) {
-                $outfits = Outfit::orderBy('type','desc')->get();
+                $outfits = Outfit::orderBy('type','desc')->paginate(15)->withQueryString();
                 $dir = 'desc';
             }
             elseif('size' ==  $request->sort_by && 'asc' ==  $request->dir) {
-                $outfits = Outfit::orderBy('size')->get();
+                $outfits = Outfit::orderBy('size')->paginate(15)->withQueryString();
                 $sort = 'size';
             }
             elseif('size' ==  $request->sort_by && 'desc' ==  $request->dir) {
-                $outfits = Outfit::orderBy('size', 'desc')->get();
+                $outfits = Outfit::orderBy('size', 'desc')->paginate(15)->withQueryString();
                 $dir = 'desc';
                 $sort = 'size';
             }
             else {
-                $outfits = Outfit::all();
+                $outfits = Outfit::paginate(15)->withQueryString();
             }
         }
         // FILTRAVIMAS
         elseif($request->master_id) {
-            $outfits = Outfit::where('master_id', (int) $request->master_id)->get();
+            $outfits = Outfit::where('master_id', (int) $request->master_id)->paginate(15)->withQueryString();
             $default_master = (int) $request->master_id;
         }
         // SEARCH paieska
         elseif($request->s) {
                 //'%'. searchina kazko panasaus, jei rasai coat, atiduoda rain coat ir t.t.
                 // % tipo bet kas
-                $outfits = Outfit::where('type', 'like', '%'.$request->s.'%')->get();
+                $outfits = Outfit::where('type', 'like', '%'.$request->s.'%')->paginate(15)->withQueryString();
                 $s = $request->s;
         }
         elseif($request->do_search) {
-            $outfits = Outfit::where('type', 'like', '')->get();
+            $outfits = Outfit::where('type', 'like', '')->paginate(15)->withQueryString();
     }
         else {
-            $outfits = Outfit::all();
+            $outfits = Outfit::paginate(15)->withQueryString();
         }
 
         return view('outfit.index', [

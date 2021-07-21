@@ -79,6 +79,9 @@
                </div>
 
                <div class="card-body">
+               <div class="pager-links">
+               {{ $outfits->links() }}
+               </div>
                <ul class="list-group">
                  @forelse ($outfits as $outfit)
                   <li class="list-group-item">
@@ -100,6 +103,9 @@
                       <h3>No results</h3>
                 @endforelse
                 </ul>
+               </div>
+               <div class="pager-links">
+               {{ $outfits->links() }}
                </div>
            </div>
        </div>

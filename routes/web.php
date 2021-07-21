@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// kad belekas negaletu prisireginti (aktualu, kai fakinam duomenis i lenteles)
+// dingsta ne tik linkas, bet ir registravimo funkcionalumas
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
