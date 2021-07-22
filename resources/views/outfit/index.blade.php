@@ -91,6 +91,7 @@
                         <span class="list-container__content__master">{{$outfit->masterOfOutfit->name}} {{$outfit->masterOfOutfit->surname}}</span>
                       </div>
                       <div class="list-container__buttons">
+                        <a href="{{route('outfit.show', [$outfit])}}" class="btn btn-warning">Info</a>
                         <a href="{{route('outfit.edit', [$outfit])}}" class="btn btn-success">Edit</a>
                         <form method="POST" action="{{route('outfit.destroy', [$outfit])}}">
                           @csrf
