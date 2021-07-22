@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             DB::table('outfits')->insert([
                 'type' => $types[rand(0, count($types) - 1)],
                 'color' => $faker->safeColorName,
+                'photo' => rand(0, 2) ? $faker->imageUrl(200, 300) : null,
                 'size' => rand(4, 24),
                 'about' => $faker->realText(300, 5),
                 'master_id' => rand(1, 20)

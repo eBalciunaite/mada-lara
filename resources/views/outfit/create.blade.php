@@ -8,7 +8,7 @@
                <div class="card-header">New Outfit</div>
 
                <div class="card-body">
-                 <form method="POST" action="{{route('outfit.store')}}">
+                 <form method="POST" action="{{route('outfit.store')}}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Type: </label>
                         <input type="text" class="form-control" name="outfit_type">
@@ -24,11 +24,25 @@
                         <input type="text" class="form-control" name="outfit_size">
                         <small class="form-text text-muted">Outfit size.</small>
                     </div>
+                    {{-- pic
+                    jei turime file, si forma (virsuj forma)turi pasipildyti malda
+                    google form enctype
+                    enctype="multipart/form-data"
+                     --}}
+
+                    <div class="form-group">
+                            <label>Photo: </label>
+                            <input type="file" class="form-control" name="outfit_photo">
+                            <small class="form-text text-muted">Upload outfit photo.</small>
+                    </div>
+
+
                     <div class="form-group">
                         <label>About: </label>
                         <textarea name="outfit_about" class="form-control" id="summernote"></textarea>
                         <small class="form-text text-muted">About outfit</small>
                     </div>
+                    
                     <div class="form-group">                     
                         <select name="master_id"  class="form-control">
                             @foreach ($masters as $master)

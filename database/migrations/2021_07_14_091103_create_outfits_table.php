@@ -17,6 +17,7 @@ class CreateOutfitsTable extends Migration
             $table->id();
             $table->string('type', 50);
             $table->string('color', 20);
+            $table->string('photo', 200)->nullable();
             $table->integer('size');
             $table->text('about');
             $table->unsignedBigInteger('master_id');

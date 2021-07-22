@@ -7,7 +7,7 @@
            <div class="card">
                <div class="card-header">Edit Outfit</div>
                <div class="card-body">
-                 <form method="POST" action="{{route('outfit.update', [$outfit])}}">
+                 <form method="POST" action="{{route('outfit.update', [$outfit])}}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Type: </label>
                         <input type="text" class="form-control" name="outfit_type" value="{{$outfit->type}}">
@@ -23,6 +23,23 @@
                         <input type="text" class="form-control" name="outfit_size" value="{{$outfit->size}}">
                         <small class="form-text text-muted">Outfit size.</small>
                     </div>
+
+                     <div class="form-group">
+                            <div class="small-photo">
+                                @if($outfit->photo)
+                                <img src="{{$outfit->photo}}">
+                                <br>
+                                <label>Delete photo 
+                                <input type="checkbox" name="delete_outfit_photo"></label> 
+                                @else
+                                <img src="{{asset('no-image.jpg')}}">
+                                @endif
+                            </div>
+                            <label>Photo: </label>
+                            <input type="file" class="form-control" name="outfit_photo">
+                            <small class="form-text text-muted">Upload outfit photo.</small>
+                        </div>
+
                     <div class="form-group">
                         <label>About: </label>
                         <textarea name="outfit_about" class="form-control" id="summernote">{{$outfit->about}}</textarea>

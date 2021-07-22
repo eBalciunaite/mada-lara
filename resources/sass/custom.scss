@@ -64,3 +64,20 @@
   .pager-links {
     padding: 20px;
   }
+
+  .list-container__photo {
+    img {
+        width: 200px;
+        height: auto;
+    }
+}
+
+.small-photo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    img {
+        width: 80px;
+        height: auto;
+    }
+  }

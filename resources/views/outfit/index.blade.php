@@ -86,6 +86,14 @@
                  @forelse ($outfits as $outfit)
                   <li class="list-group-item">
                     <div class="list-container">
+                            <div class="list-container__photo">
+                                @if($outfit->photo)
+                                   <img src="{{$outfit->photo}}">
+                                   @else
+                                    <img src="{{asset('no-image.jpg')}}">
+                                @endif
+
+                            </div>
                       <div class="list-container__content">
                         <span class="list-container__content__outfit">{{$outfit->type}} size: {{$outfit->size}}</span>
                         <span class="list-container__content__master">{{$outfit->masterOfOutfit->name}} {{$outfit->masterOfOutfit->surname}}</span>
